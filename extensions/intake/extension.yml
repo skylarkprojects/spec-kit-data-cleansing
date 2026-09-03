@@ -1,0 +1,31 @@
+schema_version: "1.0"
+
+extension:
+  id: intake
+  name: "Dataset Intake Assessment"
+  version: "1.0.0"
+  description: "Capture, assess, and decide go/kill on a candidate raw dataset before it enters the cleansing pipeline, with per-dataset notes stored under instances/<name>/intake/<slug>/"
+  author: spec-kit-core
+  repository: https://github.com/github/spec-kit
+  license: MIT
+
+requires:
+  speckit_version: ">=0.9.0"
+
+provides:
+  commands:
+    - name: speckit.intake.capture
+      file: commands/speckit.intake.capture.md
+      description: "Capture and normalize a candidate raw dataset (pasted description, URL, or file pointer) into an intake note"
+    - name: speckit.intake.assess
+      file: commands/speckit.intake.assess.md
+      description: "Assess a captured dataset's fit against the target data model, rights, and redundancy with the existing registry"
+    - name: speckit.intake.decide
+      file: commands/speckit.intake.decide.md
+      description: "Apply a go / needs-clarification / kill gate; a go registers the dataset and hands off to 01-audit.md"
+
+tags:
+  - "intake"
+  - "triage"
+  - "workflow"
+  - "data-quality"

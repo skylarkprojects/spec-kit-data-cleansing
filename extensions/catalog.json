@@ -1,8 +1,39 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-07-17T00:00:00Z",
+  "updated_at": "2026-09-03T00:00:00Z",
   "catalog_url": "https://raw.githubusercontent.com/github/spec-kit/main/extensions/catalog.json",
   "extensions": {
+    "intake": {
+      "name": "Dataset Intake Assessment",
+      "id": "intake",
+      "version": "1.0.0",
+      "description": "Capture, assess, and decide go/kill on a candidate raw dataset before it enters the cleansing pipeline. A go verdict registers the dataset and hands off to 01-audit.md; a kill closes it. Lives under instances/<name>/intake/<slug>/",
+      "author": "spec-kit-core",
+      "repository": "https://github.com/github/spec-kit",
+      "bundled": true,
+      "tags": [
+        "intake",
+        "discovery",
+        "triage",
+        "data-quality",
+        "workflow"
+      ]
+    },
+    "issue": {
+      "name": "Data Issue Triage Workflow",
+      "id": "issue",
+      "version": "1.0.0",
+      "description": "Assess, resolve, and verify data quality issues found in a dataset after it has passed 05-implement.md, with per-issue reports stored under instances/<name>/datasets/<dataset_id>/issues/<slug>/",
+      "author": "spec-kit-core",
+      "repository": "https://github.com/github/spec-kit",
+      "bundled": true,
+      "tags": [
+        "data-quality",
+        "triage",
+        "workflow",
+        "qa"
+      ]
+    },
     "agent-context": {
       "name": "Coding Agent Context",
       "id": "agent-context",
@@ -21,10 +52,10 @@
       "name": "Idea Assessment Pipeline",
       "id": "assess",
       "version": "1.0.0",
-      "description": "Assess an idea before Spec-Driven Development via intake, research, define, shape, and decide. A go verdict hands off to /speckit.specify; a kill closes it. Lives under .specify/assessments/<slug>/",
+      "description": "[Software-delivery variant — superseded for this data cleansing methodology by 'intake'] Assess an idea before Spec-Driven Development via intake, research, define, shape, and decide. A go verdict hands off to /speckit.specify; a kill closes it. Lives under .specify/assessments/<slug>/",
       "author": "spec-kit-core",
       "repository": "https://github.com/github/spec-kit",
-      "bundled": true,
+      "bundled": false,
       "tags": [
         "assessment",
         "discovery",
@@ -37,10 +68,10 @@
       "name": "Bug Triage Workflow",
       "id": "bug",
       "version": "1.0.0",
-      "description": "Assess, fix, and validate bug reports against the codebase with per-bug reports stored under .specify/bugs/<slug>/",
+      "description": "[Software-delivery variant — superseded for this data cleansing methodology by 'issue'] Assess, fix, and validate bug reports against the codebase with per-bug reports stored under .specify/bugs/<slug>/",
       "author": "spec-kit-core",
       "repository": "https://github.com/github/spec-kit",
-      "bundled": true,
+      "bundled": false,
       "tags": [
         "bug",
         "triage",

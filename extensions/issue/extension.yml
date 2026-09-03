@@ -1,0 +1,31 @@
+schema_version: "1.0"
+
+extension:
+  id: issue
+  name: "Data Issue Triage Workflow"
+  version: "1.0.0"
+  description: "Assess, resolve, and verify data quality issues found in a dataset that has already been through the cleansing pipeline, with per-issue reports stored under instances/<name>/datasets/<dataset_id>/issues/<slug>/"
+  author: spec-kit-core
+  repository: https://github.com/github/spec-kit
+  license: MIT
+
+requires:
+  speckit_version: ">=0.9.0"
+
+provides:
+  commands:
+    - name: speckit.issue.assess
+      file: commands/speckit.issue.assess.md
+      description: "Assess a data quality issue report (pasted text or URL) against an implemented dataset and propose a remediation"
+    - name: speckit.issue.resolve
+      file: commands/speckit.issue.resolve.md
+      description: "Apply the remediation from an issue assessment and log it to the dataset's changelog"
+    - name: speckit.issue.verify
+      file: commands/speckit.issue.verify.md
+      description: "Validate that a previously resolved data issue is actually fixed and record the verification report"
+
+tags:
+  - "data-quality"
+  - "triage"
+  - "workflow"
+  - "qa"

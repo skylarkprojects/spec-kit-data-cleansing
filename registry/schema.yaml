@@ -1,0 +1,55 @@
+# Schema for one dataset registry entry.
+# One YAML file per dataset, at instances/<name>/registry/<dataset_id>.yaml.
+# scripts/stage_gate.py and scripts/changelog.py read and write these fields directly —
+# keep this file in sync with what those scripts expect.
+
+dataset_id: string          # required, unique slug, matches the filename (without .yaml)
+name: string                # human-readable dataset name
+source: string               # where the raw data came from
+owner: string                 # person/team responsible for approvals
+added_date: date              # ISO 8601, when the dataset entered the pipeline
+raw_path: string               # path to the immutable raw source file(s)
+changelog_path: string          # path to this dataset's append-only changelog (JSON Lines)
+
+# One block per pipeline stage, in order. A stage may only be started
+# (per scripts/stage_gate.py) once the stage immediately before it has status: approved.
+# "audit" has no predecessor stage gate — it's gated instead by 00-init.md's
+# constitution/target-data-model completeness check, not by another stage's approval.
+stages:
+  audit:
+    status: draft            # draft | approved | rejected
+    artifact_path: string_or_null   # path to audit-report.md once written
+    approved_by: string_or_null
+    approved_date: date_or_null
+    notes: string_or_null
+  specify:
+    status: draft
+    artifact_path: string_or_null   # path to spec.md
+    approved_by: string_or_null
+    approved_date: date_or_null
+    notes: string_or_null
+  plan:
+    status: draft
+    artifact_path: string_or_null   # path to plan.md
+    approved_by: string_or_null
+    approved_date: date_or_null
+    notes: string_or_null
+  tasks:
+    status: draft
+    artifact_path: string_or_null   # path to tasks.md
+    approved_by: string_or_null
+    approved_date: date_or_null
+    notes: string_or_null
+  implement:
+    status: draft
+    artifact_path: string_or_null   # path to the final validation report
+    approved_by: string_or_null
+    approved_date: date_or_null
+    notes: string_or_null
+
+# status meanings:
+#   draft    — artifact exists (or the stage hasn't started: artifact_path is null) but is
+#              not yet approved; the next stage MUST NOT begin.
+#   approved — a named person/role has explicitly signed off; the next stage MAY begin.
+#   rejected — the artifact was reviewed and sent back; treat like draft for gating
+#              purposes, but the notes field MUST explain why.
